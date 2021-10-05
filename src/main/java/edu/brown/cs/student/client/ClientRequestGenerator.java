@@ -23,7 +23,7 @@ public class ClientRequestGenerator {
     // TODO build and return a new GET HttpRequest.
     // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
     // https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html
-    URI uri = URI.create(restrictedUri);
+    URI uri = URI.create(reqUri);
     HttpRequest.Builder builder = HttpRequest.newBuilder(uri);
     HttpRequest request = builder.build();
     return request;
@@ -79,8 +79,8 @@ public class ClientRequestGenerator {
     // Our taName parameter can either be empty, or some name, in which case it takes the format "?taName=name".
     // If you tried this in the web browser URL you might see something like
     // https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/securedResource?taName=theInputName
-    // TODO set the taName. It should either be empty "" if the param is empty, or else of the format "?taName=param"
-    String taName = null;
+    // TODO set the taName. It should either be empty "" if thgete param is empty, or else of the format "?taName=param"
+    String taName = "";
     if (!param.isEmpty()) {
       taName = "?taName=" + param;
     }
@@ -93,6 +93,7 @@ public class ClientRequestGenerator {
     HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(reqUri))
             .header("x-api-key", apiKey)
+            .GET()
             .build();
     return request;
   }
